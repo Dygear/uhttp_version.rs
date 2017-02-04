@@ -16,6 +16,10 @@ assert_eq!(HttpVersion::from_bytes(b"HTTP/1.0"), Ok(HttpVersion::from_parts(1, 0
 assert_eq!(HttpVersion::from_bytes(b"HTTP/1.1"), Ok(HttpVersion::from_parts(1, 1)));
 assert_eq!(HttpVersion::from_bytes(b"HTTP/4.2"), Ok(HttpVersion::from_parts(4, 2)));
 
+assert_eq!("HTTP/1.0".parse(), Ok(HttpVersion::from_parts(1, 0)));
+assert_eq!("HTTP/1.1".parse(), Ok(HttpVersion::from_parts(1, 1)));
+assert_eq!("HTTP/4.2".parse(), Ok(HttpVersion::from_parts(4, 2)));
+
 assert!(HttpVersion::from_bytes(b"http/1.1").is_err());
 assert!(HttpVersion::from_bytes(b"HTTP/1.42").is_err());
 assert!(HttpVersion::from_bytes(b"HTTP/1-1").is_err());
@@ -37,7 +41,7 @@ it as a dependency in `Cargo.toml`:
 
 ```toml
 [dependencies]
-uhttp_version = "0.5.0"
+uhttp_version = "0.6.0"
 ```
 and importing it in the crate root:
 

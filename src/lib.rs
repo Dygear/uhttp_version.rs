@@ -12,6 +12,10 @@
 //! assert_eq!(HttpVersion::from_bytes(b"HTTP/1.1"), Ok(HttpVersion::from_parts(1, 1)));
 //! assert_eq!(HttpVersion::from_bytes(b"HTTP/4.2"), Ok(HttpVersion::from_parts(4, 2)));
 //!
+//! assert_eq!("HTTP/1.0".parse(), Ok(HttpVersion::from_parts(1, 0)));
+//! assert_eq!("HTTP/1.1".parse(), Ok(HttpVersion::from_parts(1, 1)));
+//! assert_eq!("HTTP/4.2".parse(), Ok(HttpVersion::from_parts(4, 2)));
+//!
 //! assert!(HttpVersion::from_bytes(b"http/1.1").is_err());
 //! assert!(HttpVersion::from_bytes(b"HTTP/1.42").is_err());
 //! assert!(HttpVersion::from_bytes(b"HTTP/1-1").is_err());
@@ -88,6 +92,14 @@ impl std::fmt::Display for HttpVersion {
     }
 }
 
+impl std::str::FromStr for HttpVersion {
+    type Err = ();
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        HttpVersion::from_bytes(s.as_bytes())
+    }
+}
+
 #[cfg(test)]
 mod test {
     use super::*;
@@ -119,6 +131,13 @@ mod test {
             major: 9,
             minor: 9,
         }));
+
+        assert_eq!("HTTP/1.1".parse(), Ok(HttpVersion {
+            major: 1,
+            minor: 1,
+        }));
+
+        assert_eq!("http/1.1".parse::<HttpVersion>(), Err(()));
 
         assert_eq!(HttpVersion::from_bytes(b"http/1.1"), Err(()));
         assert_eq!(HttpVersion::from_bytes(b"Http/1.1"), Err(()));
