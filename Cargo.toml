@@ -1,9 +1,9 @@
 [package]
 name = "uhttp_version"
-version = "0.6.0"
-authors = ["Mick Koch <mick@kochm.co>"]
+version = "0.6.1"
+authors = ["Mick Koch <mick@kochm.co>", "Mark Tomlin <Dygear@gmail.com>"]
 description = "HTTP version field parser/formatter"
 license = "MIT"
 documentation = "https://docs.rs/uhttp_version"
-repository = "https://github.com/kchmck/uhttp_version.rs"
+repository = "https://github.com/Dygear/uhttp_version.rs"
 keywords = ["http", "request", "response", "version"]

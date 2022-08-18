@@ -30,9 +30,6 @@
 //! assert_eq!(&buf[..], b"HTTP/4.2");
 //! ```
 
-#![feature(field_init_shorthand)]
-#![feature(static_in_const)]
-
 /// HTTP start line version field [RFC7230§2.6].
 #[derive(Copy, Clone, Eq, PartialEq, Debug, Hash)]
 pub struct HttpVersion {
